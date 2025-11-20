@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../../public/resources/logo.png";
+import Logo from "../../public/resources/Letterhead.png";
 import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
@@ -68,7 +68,7 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { label: "Home", href: "/" },
-    { label: "Products", href: "/products" },
+    { label: "Products", href: "/product" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
@@ -77,13 +77,13 @@ const Header: React.FC = () => {
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center pointer-events-none">
       <nav className="pointer-events-auto bg-white/20 backdrop-blur-2xl border border-white/20 shadow-lg rounded-4xl px-10 py-4 flex items-center space-x-10 transition-all duration-300">
         <div className="flex items-center space-x-3">
-          <Image src={Logo} alt="INOVEC" width={40} height={40} className="rounded-md" />
+          <Image src={Logo} alt="INOVEC" width={120} height={150} className="rounded-md" />
           <span
             className={`font-display text-2xl font-bold drop-shadow-md ${
               isLight ? "text-gray-900" : "text-white"
             }`}
           >
-            INOVEC
+            NAK
           </span>
         </div>
 

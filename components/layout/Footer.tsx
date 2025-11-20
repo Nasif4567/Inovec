@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
                   <Image src={Logo} alt="INOVEC" width={40} height={40} />
-              <span className="font-display text-xl font-bold bronze-gradient">INOVEC</span>
+              <span className="font-display text-xl font-bold bronze-gradient">NAK</span>
             </div>
             <p className="text-gray-400 leading-relaxed">
               Your dedicated partner for lighting, automation, HVAC, controls, and air filtration solutions in Qatar.
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             <div className="space-y-2 text-gray-400">
               <p>Qatar, Doha</p>
               <p>+974 1234 5678</p>
-              <p>info@inovec.qa</p>
+              <p>info@NAK.qa</p>
             </div>
           </div>
         </div>
