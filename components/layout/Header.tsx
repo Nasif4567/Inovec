@@ -1,14 +1,17 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "../../public/resources/Letterhead.png";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import { User,ShoppingCart } from "lucide-react";
+
 
 const Header: React.FC = () => {
   const pathname = usePathname(); // Detects route changes
   const [isLight, setIsLight] = useState(true);
+  const { data: session } = useSession();
 
   // Function: detect which section is visible
   const checkVisibleSection = () => {
@@ -73,6 +76,11 @@ const Header: React.FC = () => {
     { label: "Contact", href: "/contact" },
   ];
 
+  // Conditionally add login if user is not logged in
+  if (!session) {
+    navLinks.push({ label: "Login / Sign up", href: "/login" });
+  }
+
   return (
     <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full flex justify-center pointer-events-none">
       <nav className="pointer-events-auto bg-white/20 backdrop-blur-2xl border border-white/20 shadow-lg rounded-4xl px-10 py-4 flex items-center space-x-10 transition-all duration-300">
@@ -101,6 +109,45 @@ const Header: React.FC = () => {
               {link.label}
             </Link>
           ))}
+          
+  <Link
+    href="/cart"
+    className={`transition font-medium flex items-center gap-2 ${
+      isLight
+        ? "text-gray-900 hover:text-yellow-500"
+        : "text-white hover:text-yellow-300"
+    }`}
+  >
+    <ShoppingCart size={20} />
+  </Link>
+
+          {session && (
+  <div className="flex flex-row gap-6 items-center">
+    <Link
+      className={`transition font-medium flex items-center gap-2 ${
+        isLight
+          ? "text-gray-900 hover:text-yellow-500"
+          : "text-white hover:text-yellow-300"
+      }`}
+      href={"/"}
+    >
+      <User size={18} />
+      {session.user?.name}
+    </Link>
+
+    <button
+      onClick={() => signOut({ callbackUrl: "/" })}
+      className={`transition font-medium px-4 py-2 rounded-xl ${
+        isLight
+          ? "bg-red-100 text-red-700 hover:bg-red-200"
+          : "bg-red-700/40 text-red-200 hover:bg-red-700/60"
+      }`}
+    >
+      Sign out
+    </button>
+  </div>
+)}
+
         </div>
       </nav>
     </header>

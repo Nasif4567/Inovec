@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ProductCartButton from "./ProductCartButton";
+import Link from "next/link";
 
 interface ProductCardProps {
   id: number;
@@ -45,9 +47,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
           <span className="text-xl font-bold bg-gradient-to-r from-[#2C2C2C] via-[#4B4B4B] to-[#6B6B6B] bg-clip-text text-transparent animate-gradient-shimmer">
             {price} QAR
           </span>
-          <button className="px-0 py-2 border-b-1 border-gray-700 bg-transparent font-medium text-gray-800 hover:border-gray-900 hover:text-gray-900 transition-all duration-300">
-            Add to Cart
-          </button>
+          <ProductCartButton label="Add to Cart" onClick={() => alert(`Added ${name} to cart!`)} />
+          <Link
+            href={`/product-details/${id}`}
+            className="px-0 py-2 border-b-1 border-gray-700 bg-transparent font-medium text-gray-800 hover:border-gray-900 hover:text-gray-900 transition-all duration-300"
+          >
+            View More
+          </Link>
         </div>
       </div>
     </motion.div>

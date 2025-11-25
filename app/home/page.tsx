@@ -4,8 +4,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import HeroImage from "../../public/resources/hero-bg.jpg";
 import { Typewriter } from "react-simple-typewriter";
+import ProductCard from "@/components/common/ProductCard";
 
 const HomePage: React.FC = () => {
+  const products = [
+    { id: 16, name: "Product 16", description: "High-quality premium engineered solution", price: 160, imageUrl: "/resources/product-16.jpg" },
+    { id: 17, name: "Product 17", description: "High-quality premium engineered solution", price: 170, imageUrl: "/resources/product-17.jpg" },
+    { id: 18, name: "Product 18", description: "High-quality premium engineered solution", price: 180, imageUrl: "/resources/product-18.jpg" },
+  ];
   return (
     <div  className="w-full overflow-hidden">
       {/* Cart Dropdown 
@@ -68,29 +74,7 @@ const HomePage: React.FC = () => {
           </div>
         </motion.div>
       </section>
-
-      {/* Statistics 
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {[500, 15, 2000].map((num, i) => (
-              <motion.div
-                key={i}
-                className="stats-item"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-              >
-                <div className="text-5xl font-bold bronze-gradient">{num}+</div>
-                <p className="text-gray-600 text-lg font-medium">
-                  {i === 0 ? "Happy Clients" : i === 1 ? "International Partners" : "Projects Completed"}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
+     
 
       {/* Featured Products */}
       <section data-header-theme="light" className="py-20 bg-gradient-to-r from-[#EFEFEF] via-[#F9F9F9] to-[#E5E5E5] animate-gradient-shimmer">
@@ -104,47 +88,17 @@ const HomePage: React.FC = () => {
   industrial lighting, advanced HVAC controls, and cutting-edge automation solutions. 
   Explore our premium selection designed for efficiency, reliability, and innovation.
 </p>
-
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[16, 17, 18, 19].map((id, i) => (
-              <motion.div
-                key={i}
-                className="card-hover bg-white rounded-lg shadow-lg overflow-hidden h-96"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.15 }}
-              >
-                <Image
-  src={`/resources/product-${id}.jpg`}
-  alt={`Product ${id}`}
-  width={500}
-  height={300}
-  className="w-full h-48 object-cover"
-/>
-                <div className="p-6">
-  <h3 className="font-display text-xl font-semibold mb-2 bg-gradient-to-r from-[#2C2C2C] via-[#4B4B4B] to-[#6B6B6B] bg-clip-text text-transparent animate-gradient-shimmer">
-    Product {id}
-  </h3>
-  <p className="mb-4 bg-gradient-to-r from-[#3A3A3A] via-[#5A5A5A] to-[#7A7A7A] bg-clip-text text-transparent animate-gradient-shimmer">
-    High-quality premium engineered solution
-  </p>
-  <div className="flex justify-between items-center">
-    <span className="text-xl font-bold bg-gradient-to-r from-[#2C2C2C] via-[#4B4B4B] to-[#6B6B6B] bg-clip-text text-transparent animate-gradient-shimmer">
-      {id * 10} QAR
-    </span>
-    <button className="px-0 py-2 border-b-1 border-gray-700 bg-transparent font-medium text-gray-800 hover:border-gray-900 hover:text-gray-900 transition-all duration-300">
-    Add to Cart
-    </button>
-
-
-  </div>
 </div>
-
-
-              </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {products.map((prod) => (
+              <ProductCard
+                key={prod.id}
+                id={prod.id}
+                name={prod.name}
+                description={prod.description}
+                price={prod.price}
+                imageUrl={prod.imageUrl}
+              />
             ))}
           </div>
         </div>
