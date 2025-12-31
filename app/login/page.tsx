@@ -78,7 +78,7 @@ const handleLogin = async () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 p-6">
       {page === "login" ? (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 backdrop-blur">
-          <h2 className="text-3xl font-semibold text-center mb-6 text-gray-900">Welcome Back</h2>
+          <h2 className="text-3xl text-center mb-6 text-gray-900">Welcome Back</h2>
 
           {error && <p className="text-red-600 text-center mb-2">{error}</p>}
           {success && <p className="text-green-600 text-center mb-2">{success}</p>}
@@ -112,7 +112,7 @@ const handleLogin = async () => {
         </motion.div>
       ) : (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="w-full max-w-md bg-white/80 rounded-2xl shadow-lg p-8 backdrop-blur">
-          <h2 className="text-3xl font-semibold text-center mb-6 text-gray-900">Create Your Account</h2>
+          <h2 className="text-3xl text-center mb-6 text-gray-900">Create Your Account</h2>
 
           {error && <p className="text-red-600 text-center mb-2">{error}</p>}
           {success && <p className="text-green-600 text-center mb-2">{success}</p>}

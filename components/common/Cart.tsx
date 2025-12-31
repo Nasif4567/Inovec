@@ -39,7 +39,7 @@ export default function CartItem({
       {/* Product Image */}
       <Image
         src={image}
-        alt={name}
+        alt={"Product Image"}
         width={90}
         height={90}
         className="rounded-lg object-cover"
@@ -47,13 +47,13 @@ export default function CartItem({
 
       {/* Product Details */}
       <div className="flex flex-col flex-1 text-black">
-        <h1 className="font-semibold text-lg">{name}</h1>
+        <h1 className="text-lg">{name}</h1>
 
         {description && (
           <p className="text-sm text-black opacity-80">{description}</p>
         )}
 
-        <span className="font-bold mt-1 text-black">
+        <span className="mt-1 text-black">
           {price.toFixed(2)} QAR
         </span>
       </div>

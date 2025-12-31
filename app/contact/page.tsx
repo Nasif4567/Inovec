@@ -1,6 +1,7 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Loader2 } from "lucide-react"; // spinner icon
 
 const ContactUsPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,18 +11,45 @@ const ContactUsPage: React.FC = () => {
     message: ""
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Your message has been sent.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setLoading(true);
+    setError("");
+    setSent(false);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (!res.ok) throw new Error("Failed to send email");
+
+      setSent(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (err: any) {
+      setError("Something went wrong. Please try again.");
+    }
+
+    setLoading(false);
   };
 
   return (
-    <section data-header-theme="light" className="bg-gradient-to-r from-[#EFEFEF] via-[#F9F9F9] to-[#E5E5E5] animate-gradient-shimmer py-48 px-4">
+    <section
+      data-header-theme="light"
+      className="bg-gradient-to-r from-[#EFEFEF] via-[#F9F9F9] to-[#E5E5E5] animate-gradient-shimmer py-48 px-4"
+    >
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
         {/* Contact Info */}
         <motion.div
@@ -34,7 +62,8 @@ const ContactUsPage: React.FC = () => {
             Contact Us
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed">
-            Have questions or need assistance? Reach out to us and our team will respond as soon as possible.
+            Have questions or need assistance? Reach out to us and our team
+            will respond as soon as possible.
           </p>
           <div className="space-y-4">
             <div>
@@ -60,6 +89,16 @@ const ContactUsPage: React.FC = () => {
           onSubmit={handleSubmit}
           className="bg-white/70 backdrop-blur-2xl p-8 rounded-2xl shadow-lg flex flex-col space-y-4"
         >
+          {sent && (
+            <p className="text-green-600 font-semibold">
+              Message sent successfully!
+            </p>
+          )}
+
+          {error && (
+            <p className="text-red-600 font-semibold">{error}</p>
+          )}
+
           <input
             type="text"
             name="name"
@@ -69,6 +108,7 @@ const ContactUsPage: React.FC = () => {
             required
             className="border border-gray-300 text-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
+
           <input
             type="email"
             name="email"
@@ -78,6 +118,7 @@ const ContactUsPage: React.FC = () => {
             required
             className="border border-gray-300 text-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
+
           <input
             type="text"
             name="subject"
@@ -87,6 +128,7 @@ const ContactUsPage: React.FC = () => {
             required
             className="border border-gray-300 text-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
+
           <textarea
             name="message"
             placeholder="Your Message"
@@ -96,16 +138,22 @@ const ContactUsPage: React.FC = () => {
             rows={5}
             className="border border-gray-300 text-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
+
           <button
             type="submit"
-            className="mt-2 px-6 py-3 font-semibold rounded-lg text-gray-800 border border-gray-700 text-gray-800 hover:bg-gray-800 hover:text-white transition-all duration-300"
+            disabled={loading}
+            className="mt-2 px-6 py-3 font-semibold rounded-lg text-gray-800 border border-gray-700 hover:bg-gray-800 hover:text-white transition-all duration-300 flex items-center justify-center"
           >
-            Send Message
+            {loading ? (
+              <Loader2 className="animate-spin w-5 h-5" />
+            ) : (
+              "Send Message"
+            )}
           </button>
         </motion.form>
       </div>
 
-      {/* Map Placeholder */}
+      {/* Map */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

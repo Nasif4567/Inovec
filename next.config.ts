@@ -1,7 +1,20 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+        pathname: '/**', // allow any path under this host
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost', // for your API routes if needed
+        port: '3000',
+        pathname: '/api/inventory/images/[itemId]', // adjust as necessary
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

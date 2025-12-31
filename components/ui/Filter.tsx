@@ -9,14 +9,24 @@ const categories = [
   { id: "filtration", label: "BMS and Automation" },
 ];
 
-export default function Filter() {
+export default function Filter({ onFilterChange }: { 
+  onFilterChange: (filters: { search: string; categories: string[] }) => void; 
+}) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const toggleCategory = (id: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
-    );
+    const updated = selectedCategories.includes(id)
+      ? selectedCategories.filter((c) => c !== id)
+      : [...selectedCategories, id];
+
+    setSelectedCategories(updated);
+    onFilterChange({ search: searchTerm, categories: updated });
+  };
+
+  const updateSearch = (value: string) => {
+    setSearchTerm(value);
+    onFilterChange({ search: value, categories: selectedCategories });
   };
 
   return (
@@ -28,7 +38,7 @@ export default function Filter() {
           type="text"
           placeholder="Search..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => updateSearch(e.target.value)}
           className="w-full text-black px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent shadow-sm"
         />
       </section>

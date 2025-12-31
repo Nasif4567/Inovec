@@ -1,35 +1,117 @@
 'use client';
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filter from "@/components/ui/Filter";
 import ProductCard from "@/components/common/ProductCard";
 import Pagination from "@/components/common/Pagination";
 import Selector from "../../components/ui/SelectionBox";
+import { ClipLoader } from "react-spinners";
 
 export default function Page() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState<
+    { id: string; name: string; description: string; price: number; imageUrl: string }[]
+  >([]);
 
-  const products = [
-    { id: 16, name: "Product 16", description: "High-quality premium engineered solution", price: 160, imageUrl: "/resources/product-16.jpg" },
-    { id: 17, name: "Product 17", description: "High-quality premium engineered solution", price: 170, imageUrl: "/resources/product-17.jpg" },
-    { id: 18, name: "Product 18", description: "High-quality premium engineered solution", price: 180, imageUrl: "/resources/product-18.jpg" },
-    { id: 19, name: "Product 19", description: "High-quality premium engineered solution", price: 190, imageUrl: "/resources/product-19.jpg" },
-  ];
+  const itemsPerPage = 9;
 
-  const itemsPerPage = 4; // adjust if you want more products per page
+  const [filters, setFilters] = useState<{
+    search: string;
+    categories: string[];
+  }>({
+    search: "",
+    categories: [],
+  });
+
+  // Load all items initially
+  useEffect(() => {
+    const loadItems = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/inventory/items");
+        const data = await res.json();
+        
+
+        setProducts(
+        Array.isArray(data.items)
+          ? data.items.map((item: any) => ({
+              id: item.item_id,
+              name: item.item_name,
+              description: item.description || "No description available.",
+              price: item.rate || 0,
+              imageUrl: `/api/inventory/images/${item.item_id}`,
+            }))
+          : []
+      );
+        
+      } catch (err) {
+        console.error("Error loading items:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadItems();
+  }, []);
+
+  // Filter API handler
+  useEffect(() => {
+  const applyFilter = async () => {
+    try {
+      setLoading(true); // Start loading
+      const res = await fetch("/api/inventory/filter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(filters),
+      });
+
+      const data = await res.json();
+      setProducts(
+        Array.isArray(data.items)
+          ? data.items.map((item: any) => ({
+              id: item.item_id,
+              name: item.item_name,
+              description: item.description || "No description available.",
+              price: item.rate || 0,
+              imageUrl: `/api/inventory/images/${item.item_id}`,
+            }))
+          : []
+      );
+    } catch (err) {
+      console.error("Error applying filters:", err);
+    } finally {
+      setLoading(false); // End loading
+    }
+  };
+
+  const timer = setTimeout(() => applyFilter(), 500);
+  return () => clearTimeout(timer);
+}, [filters]);
+
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
-  const currentProducts = products.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+  const currentProducts = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="flex flex-col bg-gradient-to-b from-[#FFFAF0] via-[#FFF5E5] to-[#FFFDF8] items-center justify-center space-y-10 p-6 md:p-10 relative min-h-screen">
-      {/* Subtle background blur for premium effect */}
+      {/* Background blur */}
       <div className="absolute inset-0 bg-white/10 blur-xl pointer-events-none"></div>
 
       {/* Banner */}
-      <section data-header-theme="light"  className="w-full mt-24 bg-gradient-to-r from-[#FFD700] via-[#FFC107] to-[#FFA500] rounded-2xl h-64 flex flex-col items-center justify-center text-center shadow-2xl px-6 md:px-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">Our Products</h1>
+      <section
+        data-header-theme="light"
+        className="w-full mt-24 animate-gradient-shimmer bg-gradient-to-r from-[#5a3f37] via-[#8c6239] to-[#c89142] rounded-2xl h-64 flex flex-col items-center justify-center text-center shadow-2xl px-6 md:px-12"
+      >
+        <h1 className="text-4xl md:text-5xl text-white mb-4">
+          Our Products
+        </h1>
         <p className="text-lg md:text-xl font-medium text-white max-w-3xl mb-6">
-          Discover our comprehensive range of industrial lighting, HVAC controls, and automation solutions that empower your business with efficiency, innovation, and reliability.
+          Discover our comprehensive range of advanced industrial monitoring, sensors,
+          automation, and control solutions tailored for high-performance environments.
         </p>
       </section>
 
@@ -37,37 +119,55 @@ export default function Page() {
         <Selector />
       </div>
 
-      {/* Main Content: Filter + Products */}
+      {/* Main Content */}
       <section className="w-full flex flex-col md:flex-row gap-8">
         {/* Sidebar Filter */}
         <div className="md:w-1/4 w-full">
-          <Filter />
+          <Filter onFilterChange={(filters) => setFilters(filters)} />
         </div>
 
         {/* Product Grid + Pagination */}
-        <div className="md:w-3/4 w-full flex flex-col">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {currentProducts.map((prod) => (
-              <ProductCard
-                key={prod.id}
-                id={prod.id}
-                name={prod.name}
-                description={prod.description}
-                price={prod.price}
-                imageUrl={prod.imageUrl}
-              />
-            ))}
-          </div>
+        {/* Product Grid Area */}
+<div className="md:w-3/4 w-full flex flex-col">
 
-          {/* Pagination */}
-          <div className="flex justify-center mt-8">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={(page: number) => setCurrentPage(page)}
-            />
-          </div>
-        </div>
+  {loading ? (
+    /* 1. SHOW ONLY LOADER WHILE FETCHING */
+    <div className="flex flex-col items-center justify-center py-28">
+      <ClipLoader size={60} color="#FFA500" />
+      <p className="mt-4 text-lg font-semibold text-gray-700">Loading products...</p>
+    </div>
+  ) : products.length === 0 ? (
+    /* 2. SHOW "NOT FOUND" ONLY IF LOADING IS FINISHED AND ARRAY IS EMPTY */
+    <div className="w-full text-center py-20 text-xl font-semibold text-gray-600">
+      No products found
+    </div>
+  ) : (
+    /* 3. SHOW ACTUAL PRODUCTS */
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {currentProducts.map((prod) => (
+          <ProductCard
+            key={prod.id}
+            id={prod.id}
+            name={prod.name}
+            description={prod.description}
+            price={prod.price}
+            imageUrl={prod.imageUrl}
+          />
+        ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-8">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
+    </>
+  )}
+</div>
       </section>
     </div>
   );

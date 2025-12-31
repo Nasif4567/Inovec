@@ -5,33 +5,45 @@ import { motion } from "framer-motion";
 import HeroImage from "../../public/resources/hero-bg.jpg";
 import { Typewriter } from "react-simple-typewriter";
 import ProductCard from "@/components/common/ProductCard";
+import Link from "next/link";
 
 const HomePage: React.FC = () => {
+  
   const products = [
-    { id: 16, name: "Product 16", description: "High-quality premium engineered solution", price: 160, imageUrl: "/resources/product-16.jpg" },
-    { id: 17, name: "Product 17", description: "High-quality premium engineered solution", price: 170, imageUrl: "/resources/product-17.jpg" },
-    { id: 18, name: "Product 18", description: "High-quality premium engineered solution", price: 180, imageUrl: "/resources/product-18.jpg" },
+  { 
+    id: 16, 
+    name: "ENOV EV-EM1-DP-5W-3H, LED Emergency Battery kit, 3 Hours battery", 
+    description: "Industrial-grade emergency backup solution providing 3 hours of continuous illumination during power failures. Features a high-capacity battery and rapid-switch technology to ensure safety in commercial and residential spaces.", 
+    price: 160, 
+    imageUrl: "/resources/enov.jpg" 
+  },
+  { 
+    id: 17, 
+    name: "LEDVANCE LED PANEL 600x600, 42W, 4000LM, 6500K COOL DALYLIGHT", 
+    description: "High-performance 600x600 recessed panel offering 4000 Lumens of crisp 6500K daylight. Rated IP40 with a 30,000-hour lifespan and 3-year warranty, making it ideal for offices, hospitals, and modern retail environments.", 
+    price: 170, 
+    imageUrl: "/resources/fff.jpg" 
+  },
+  { 
+    id: 18, 
+    name: "ORO LED Panel Light, 20W, 3000K, 90 lm/w", 
+    description: "Energy-efficient warm white (3000K) panel light with a high luminous efficacy of 90 lm/W. Perfect for creating a comfortable atmosphere in residential interiors while significantly reducing energy consumption.", 
+    price: 180, 
+    imageUrl: "/resources/lef.jpg" 
+  }
+];
+
+// Professional Brand Data
+  const brands = [
+    { name: "SIEMENS", color: "text-[#009999]" },
+    { name: "TRIDONIC", color: "text-[#E30613]" },
+    { name: "ONTEC", color: "text-[#005793]" },
+    { name: "RYDAIR", color: "text-[#231F20]" },
+    { name: "ENOV", color: "text-[#E6332A]" },
   ];
+  
   return (
     <div  className="w-full overflow-hidden">
-      {/* Cart Dropdown 
-      <div id="cart-dropdown" className="cart-dropdown absolute top-full right-4 w-80 bg-white rounded-lg shadow-xl border border-gray-200 p-4">
-        <div className="flex justify-between items-center mb-4">
-          <h3 className="font-display text-lg font-semibold">Shopping Cart</h3>
-          <button id="close-cart" className="text-gray-500 hover:text-gray-700">
-            ✕
-          </button>
-        </div>
-        <div id="cart-items" className="space-y-3 max-h-64 overflow-y-auto"></div>
-        <div className="border-t pt-4 mt-4">
-          <div className="flex justify-between items-center mb-4">
-            <span className="font-semibold">Total: </span>
-            <span id="cart-total" className="font-bold bronze-gradient">$0.00</span>
-          </div>
-          <button className="w-full btn-bronze text-white py-2 px-4 rounded-lg font-medium">Checkout</button>
-        </div>
-      </div> */}
-
       {/* Hero Section */}
       <section data-header-theme="dark" className="relative min-h-screen flex items-center justify-center  overflow-hidden">
           {/* Background Image */}
@@ -50,7 +62,7 @@ const HomePage: React.FC = () => {
           transition={{ duration: 1 }}
           className="relative z-10 text-center text-white max-w-4xl mx-auto px-4"
         >
-           <h1 className="text-white text-6xl font-bold text-center">
+           <h1 className="text-white text-6xl text-center">
         <Typewriter
           words={["Innovating Tomorrow", "Lighting the Future", "Smart Automation"]}
           loop={0}        // 0 = infinite
@@ -65,12 +77,18 @@ const HomePage: React.FC = () => {
             Your dedicated partner for Lighting, Automation, HVAC, Controls, and Air Filtration solutions in Qatar
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-bronze text-white px-8 py-4 rounded-lg font-semibold text-lg">
-              Explore Products
-            </button>
-            <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all duration-300">
-              Get Quote
-            </button>
+            <Link href="/product">
+    <button className="btn-bronze cursor-pointer text-white px-8 py-4 rounded-lg font-semibold text-lg w-full sm:w-auto">
+      Explore Products
+    </button>
+  </Link>
+
+  {/* Link to a Quote/Contact page */}
+  <Link href="/contact">
+    <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-800 transition-all duration-300 w-full sm:w-auto">
+      Get Quote
+    </button>
+  </Link>
           </div>
         </motion.div>
       </section>
@@ -80,10 +98,10 @@ const HomePage: React.FC = () => {
       <section data-header-theme="light" className="py-20 bg-gradient-to-r from-[#EFEFEF] via-[#F9F9F9] to-[#E5E5E5] animate-gradient-shimmer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#8A8A8A] via-[#B0B0B0] to-[#C0D6E4] bg-clip-text text-transparent mb-4 animate-gradient-shimmer">
+            <h2 className="font-display text-4xl md:text-5xl bg-gradient-to-r from-[#4A4A4A] via-[#636363] to-[#4A6070] bg-clip-text text-transparent mb-4 animate-gradient-shimmer">
   Best-in-Class Products
 </h2>
-            <p className="text-xl max-w-2xl mx-auto bg-gradient-to-r from-[#A8A8A8] via-[#C0C0C0] to-[#D0E2F0] bg-clip-text text-transparent animate-gradient-shimmer">
+            <p className="text-xl max-w-2xl mx-auto bg-gradient-to-r from-[#4A4A4A] via-[#636363] to-[#4A6070] bg-clip-text text-transparent animate-gradient-shimmer">
   Illuminate your operations and optimize performance with our top-tier 
   industrial lighting, advanced HVAC controls, and cutting-edge automation solutions. 
   Explore our premium selection designed for efficiency, reliability, and innovation.
@@ -110,7 +128,7 @@ const HomePage: React.FC = () => {
     
     {/* Heading */}
     <div className="text-center mb-16">
-      <h2 className="font-display text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#4B4B4B] via-[#6B6B6B] to-[#8C8C8C] bg-clip-text text-transparent mb-4 animate-gradient-shimmer">
+      <h2 className="font-display text-4xl md:text-5xl bg-gradient-to-r from-[#4B4B4B] via-[#6B6B6B] to-[#8C8C8C] bg-clip-text text-transparent mb-4 animate-gradient-shimmer">
         Our Partners
       </h2>
       <p className="text-xl text-gray-800 max-w-2xl mx-auto">
@@ -120,14 +138,16 @@ const HomePage: React.FC = () => {
 
     {/* Partner Logos */}
       <div className="scroll-container">
-        {["SIEMENS", "TRIDONIC", "ONTEC", "RYDAIR", "ENOV", "SIEMENS", "TRIDONIC", "ONTEC", "RYDAIR", "ENOV"].map((name, i) => (
-          <div
-            key={i}
-            className="flex justify-center items-center w-40 h-20 rounded-lg shadow-lg bg-white/70 hover:bg-white/90 transition-all duration-300 mr-8"
-          >
-            <span className="text-gray-900 font-bold text-lg">{name}</span>
-          </div>
-        ))}
+        {[...brands, ...brands, ...brands].map((brand, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-center min-w-[200px] h-24 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+              >
+                <span className={`font-black text-xl tracking-tighter ${brand.color}`}>
+                  {brand.name}
+                </span>
+              </div>
+            ))}
       </div>
   </div>
 </section>
@@ -141,7 +161,7 @@ const HomePage: React.FC = () => {
 
       <div className="relative max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 text-white">
         <motion.h2
-          className="font-display text-5xl md:text-6xl font-extrabold mb-6 text-shadow-lg tracking-wide"
+          className="font-display text-5xl md:text-6xl mb-6 text-shadow-lg tracking-wide"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
