@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import useCartStore from "@/store/cartStore";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import CartItem from "@/components/common/Cart"; // make sure your CartItem accepts onIncrease, onDecrease, onRemove
 
 export default function CartPage() {
@@ -29,15 +30,15 @@ export default function CartPage() {
       className="min-h-screen py-40 px-6 md:px-20 bg-gray-50 flex flex-col items-center relative"
       data-header-theme="light"
     >
-      <h1 className="text-2xl text-black text-center mb-10">
+      <h1 className="text-2xl text-black text-center">
         Your Cart
       </h1>
 
       {/* Empty Cart */}
       {cart.length === 0 && (
         <div className="text-center mt-20">
-          <img src="/empty-cart.png" alt="Empty Cart" className="w-56 mx-auto mb-6 opacity-80" />
-          <h2 className="text-xl  mb-4">Your cart is empty</h2>
+          <ShoppingCartIcon className="w-56 h-56 text-black mx-auto mb-6 opacity-80" />
+          <h2 className="text-xl  text-black  mb-4">Your cart is empty</h2>
           <button
             onClick={() => router.push("/")}
             className="px-6 py-3 bg-yellow-400 text-black rounded-lg shadow hover:bg-yellow-500 transition"

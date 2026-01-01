@@ -187,12 +187,16 @@ const HomePage: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
+          <Link href="/contact">
           <button className="bg-white text-gray-800 px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300">
             Request Consultation
           </button>
+          </Link>
+          <Link href="/product">
           <button className="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-800 hover:scale-105 transition-all duration-300 shadow-lg">
             Browse Catalog
           </button>
+           </Link>
         </motion.div>
       </div>
     </section>
