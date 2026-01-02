@@ -30,7 +30,7 @@ export default function CartPage() {
       className="min-h-screen py-40 px-6 md:px-20 bg-gray-50 flex flex-col items-center relative"
       data-header-theme="light"
     >
-      <h1 className="text-2xl text-black text-center">
+      <h1 className="text-2xl text-black text-center mb-12">
         Your Cart
       </h1>
 

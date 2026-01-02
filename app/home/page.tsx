@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import HeroImage from "../../public/resources/hero-bg.jpg";
+import HeroImage from "../../public/resources/device.jpg";
 import { Typewriter } from "react-simple-typewriter";
 import ProductCard from "@/components/common/ProductCard";
 import Link from "next/link";
@@ -48,12 +48,12 @@ const HomePage: React.FC = () => {
       <section data-header-theme="dark" className="relative min-h-screen flex items-center justify-center  overflow-hidden">
           {/* Background Image */}
   <Image
-    src={HeroImage}   // ← your local image inside /public/images
-    alt="Hero Background"
-    fill
-    priority
-    className="object-cover"
-  />
+  src={HeroImage}
+  alt="Hero Background"
+  fill
+  priority
+  className="object-cover"
+/>
         <div className="absolute inset-0 bg-black/40"></div>
 
         <motion.div

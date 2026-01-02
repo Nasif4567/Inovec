@@ -58,7 +58,7 @@ const ContactUsPage: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#6B6B6B] via-[#8C8C8C] to-[#B0B0B0] bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl text-yellow-400">
             Contact Us
           </h2>
           <p className="text-gray-700 text-lg leading-relaxed">

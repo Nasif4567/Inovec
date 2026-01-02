@@ -12,7 +12,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center max-w-4xl px-6">
-        <h1 className="font-serif text-5xl md:text-7xl mb-6">
+        <h1 className="text-5xl md:text-7xl mb-6">
           About NAK
         </h1>
 

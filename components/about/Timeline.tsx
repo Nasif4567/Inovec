@@ -31,10 +31,10 @@ const Timeline = () => {
 
             <div className="bg-white rounded-lg shadow-lg p-6 hover:-translate-y-2 transition-transform">
               <div className="flex items-center mb-4">
-                <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] via-[#FFC107] to-[#FFA500] mr-4">
+                <span className="text-2xl text-black mr-4">
                   {item.year}
                 </span>
-                <h3 className="font-display bg-gradient-to-r from-[#8A8A8A] via-[#B0B0B0] to-[#C0D6E4] bg-clip-text text-transparent animate-gradient-shimmer text-xl text-black font-semibold">{item.title}</h3>
+                <h3 className="font-display text-xl text-black">{item.title}</h3>
               </div>
               <p className="text-black">{item.description}</p>
             </div>

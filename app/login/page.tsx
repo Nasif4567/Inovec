@@ -101,7 +101,7 @@ const handleLogin = async () => {
             <button
               disabled={loading}
               onClick={handleLogin}
-              className="w-full py-3 rounded-xl bg-gray-900 text-white font-medium text-lg disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-yellow-400 text-white font-medium text-lg disabled:opacity-50"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
@@ -149,7 +149,7 @@ const handleLogin = async () => {
             <button
               disabled={loading}
               onClick={handleRegister}
-              className="w-full py-3 rounded-xl bg-gray-900 text-white font-medium text-lg disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-yellow-400 text-white font-medium text-lg disabled:opacity-50"
             >
               {loading ? 'Registering...' : 'Register'}
             </button>

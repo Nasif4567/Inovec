@@ -30,7 +30,7 @@ export default function Statistics() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl font-bold mb-12 text-yellow-600">Our Achievements</h2>
+        <h2 className="text-4xl font-bold mb-12 text-yellow-400">Our Achievements</h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {stats.map((stat) => (
             <div key={stat.label}>

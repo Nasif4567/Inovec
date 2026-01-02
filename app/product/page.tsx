@@ -104,12 +104,12 @@ export default function Page() {
       {/* Banner */}
       <section
         data-header-theme="light"
-        className="w-full mt-24 animate-gradient-shimmer bg-gradient-to-r from-[#5a3f37] via-[#8c6239] to-[#c89142] rounded-2xl h-64 flex flex-col items-center justify-center text-center shadow-2xl px-6 md:px-12"
+        className="w-full mt-24 rounded-2xl h-64 flex flex-col items-center justify-center text-center px-4 md:px-12"
       >
-        <h1 className="text-4xl md:text-5xl text-white mb-4">
+        <h1 className="text-yellow-400 text-4xl md:text-5xl text-black mb-4">
           Our Products
         </h1>
-        <p className="text-lg md:text-xl font-medium text-white max-w-3xl mb-6">
+        <p className="text-lg md:text-xl font-medium text-black max-w-3xl mb-6">
           Discover our comprehensive range of advanced industrial monitoring, sensors,
           automation, and control solutions tailored for high-performance environments.
         </p>
