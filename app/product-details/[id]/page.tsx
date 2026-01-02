@@ -67,7 +67,7 @@ export default function ProductDetailsPage() {
   }, [id]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#FFFAF0] via-[#FFF5E5] to-[#FFFDF8]">
+    <div className="min-h-screen bg-white">
       {/* Back */}
       <div className="max-w-6xl mx-auto py-4 px-6">
         <button
@@ -99,7 +99,7 @@ export default function ProductDetailsPage() {
 
           {/* LEFT — Image Viewer */}
           <div className="flex flex-col">
-            <div className="relative w-full h-[420px] md:h-[500px] rounded-xl overflow-hidden shadow-lg bg-white">
+            <div className="relative w-full h-[420px] md:h-[500px] rounded-xl overflow-hidden shadow-2xl bg-white border">
               <Image
                 src={mainImage!}
                 alt={product.name}
@@ -135,7 +135,7 @@ export default function ProductDetailsPage() {
               QAR {product.price}
             </span>
 
-            <div className="bg-white p-6 rounded-xl shadow">
+            <div className="bg-white">
               <h2 className="text-xl font-semibold mb-4 text-black">
                 Specifications
               </h2>
