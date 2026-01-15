@@ -18,7 +18,7 @@ COPY . .
 RUN npx prisma generate
 
 # Build Next.js app while ignoring TypeScript errors
-RUN npm run build -- --ignore-build-errors
+RUN npm run build
 
 # Stage 2: Runner
 FROM node:20-alpine AS runner
