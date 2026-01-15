@@ -1,4 +1,5 @@
 name: Build and Deploy
+
 on:
   push:
     branches: [ main ]
@@ -8,30 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-      
-      - name: Build and Push
+
+      - name: Build and Push Docker Image
         run: |
-          docker build -t ghcr.io/${{ github.repository }}:latest .
-          docker push ghcr.io/${{ github.repository }}:latest
+          docker build -t ghcr.io/nasif4567/inovec:latest .
+          docker push ghcr.io/nasif4567/inovec:latest
 
   deploy:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: Execute Remote SSH commands
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_IP }}
-          username: root
+          username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-            docker pull ghcr.io/${{ github.repository }}:latest
-            docker stop inovec-app || true
-            docker rm inovec-app || true
+            docker pull ghcr.io/nasif4567/inovec:latest
+            docker rm -f inovec-app || true
             docker run -d --name inovec-app -p 3000:3000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e NEXTAUTH_SECRET="${{ secrets.NEXTAUTH_SECRET }}" \
-              ghcr.io/${{ github.repository }}:latest
+              ghcr.io/nasif4567/inovec:latest
