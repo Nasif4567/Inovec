@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   typescript: {
-    // Danger: skips type errors during build
+    // Danger: skips type errors during buildd
     ignoreBuildErrors: true,
   },
   images: {
