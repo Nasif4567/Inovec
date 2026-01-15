@@ -3,7 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Accept DATABASE_URL as build argument
-ARG DATABASE_URL
+ARG DATABASE_URL="postgresql://postgres:NAK!31469@db.rmuhdcbeitaxgrddjepr.supabase.co:5432/postgres"
 ENV DATABASE_URL=$DATABASE_URL
 
 COPY package*.json ./
