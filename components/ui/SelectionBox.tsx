@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 interface Category {
@@ -15,34 +15,73 @@ const categories: Category[] = [
 ];
 
 export default function ProductCategories() {
-  return (
-    <div className="flex justify-center w-full">
-      <div className="flex gap-6">
-        {categories.map((cat) => (
-          <div key={cat.name} className="relative group">
-            {/* Category Button */}
-            <button
-              className="flex items-center gap-1 px-4 py-2 text-gray-800 hover:bg-yellow-50 rounded-lg transition-all duration-200 font-medium"
-            >
-              <span>{cat.name}</span>
-              <ChevronDownIcon className="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-all duration-200" />
-            </button>
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-            {/* Subcategories Box on Hover */}
-            {cat.subcategories && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-max bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-300 z-50 p-2 flex gap-2">
-                {cat.subcategories.map((sub) => (
-                  <span
-                    key={sub}
-                    className="px-3 py-1 whitespace-nowrap text-gray-800 rounded-lg font-medium hover:bg-yellow-100 cursor-pointer transition-all duration-200"
-                  >
-                    {sub}
-                  </span>
-                ))}
+  return (
+    <div className="w-full flex justify-center">
+      <div className="w-full max-w-6xl px-4">
+
+        {/* ===== Desktop (hover) ===== */}
+        <div className="hidden md:flex justify-center gap-6">
+          {categories.map((cat) => (
+            <div key={cat.name} className="relative group">
+              <button className="flex items-center gap-1 px-4 py-2 text-gray-800 hover:bg-yellow-50 rounded-lg transition font-medium">
+                {cat.name}
+                <ChevronDownIcon className="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition" />
+              </button>
+
+              {cat.subcategories && (
+                <div className="absolute text-black top-full left-1/2 -translate-x-1/2 mt-2 bg-white rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition z-50 p-2 flex gap-2">
+                  {cat.subcategories.map((sub) => (
+                    <span
+                      key={sub}
+                      className="px-3 py-1 rounded-lg hover:bg-yellow-100 cursor-pointer font-medium whitespace-nowrap"
+                    >
+                      {sub}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* ===== Mobile / Tablet (tap) ===== */}
+        <div className="md:hidden flex flex-col gap-3">
+          {categories.map((cat, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={cat.name} className="border rounded-xl bg-white shadow-sm">
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-800 font-medium"
+                >
+                  {cat.name}
+                  <ChevronDownIcon
+                    className={`w-5 h-5 transition-transform ${
+                      isOpen ? "rotate-180 text-yellow-500" : "text-gray-400"
+                    }`}
+                  />
+                </button>
+
+                {isOpen && cat.subcategories && (
+                  <div className="px-4 pb-3 flex flex-wrap gap-2">
+                    {cat.subcategories.map((sub) => (
+                      <span
+                        key={sub}
+                        className="px-3 py-1 bg-yellow-50 rounded-lg text-gray-800 font-medium"
+                      >
+                        {sub}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            );
+          })}
+        </div>
+
       </div>
     </div>
   );

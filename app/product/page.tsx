@@ -22,6 +22,7 @@ export default function Page() {
     search: "",
     categories: [],
   });
+  
 
   // Load all items initially
   useEffect(() => {
@@ -30,8 +31,7 @@ export default function Page() {
         setLoading(true);
         const res = await fetch("/api/inventory/items");
         const data = await res.json();
-        
-
+        console.log("Fetched items:", data);
         setProducts(
         Array.isArray(data.items)
           ? data.items.map((item: any) => ({
@@ -106,7 +106,7 @@ export default function Page() {
         data-header-theme="light"
         className="w-full mt-24 rounded-2xl h-64 flex flex-col items-center justify-center text-center px-4 md:px-12"
       >
-        <h1 className="text-yellow-400 text-4xl md:text-5xl text-black mb-4">
+        <h1 className="text-[#1a3a5f] text-4xl md:text-5xl text-black mb-4">
           Our Products
         </h1>
         <p className="text-lg md:text-xl font-medium text-black max-w-3xl mb-6">

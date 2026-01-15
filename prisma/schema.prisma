@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../app/generated/prisma"
@@ -13,13 +7,35 @@ datasource db {
   provider = "postgresql"
 }
 
-
-
 model User {
   id        String   @id @default(cuid())
-  email     String   @unique
+  zohoCusID String?
   name      String?
-  password  String
+  email     String?  @unique
+  password  String?
+  phone     String?
+  address   String?
+  city      String?
+  zip       String?
+  country   String?  @default("Qatar")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique 
+  password  String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  zohoItemId String   @id @map("zoho_item_id")
+  name       String?
+  price      Decimal?
+  tabs       Json     
+  pdfs       Json?    
+  createdAt  DateTime @default(now()) @map("created_at")
 }

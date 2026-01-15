@@ -11,13 +11,17 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/60"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl px-6">
+      <div className="relative z-10 text-center max-w-4xl mt-22 px-6">
         <h1 className="text-5xl md:text-7xl mb-6">
-          About NAK
+          About Naseem Al Kawther Trading W.L.L
+        </h1>
+
+          <h1 className="text-2xl md:text-7xl mb-6">
+          نسيم الكوثر للتجارة
         </h1>
 
         <p className="text-lg md:text-2xl mb-10 font-light leading-relaxed text-white/90 max-w-3xl mx-auto drop-shadow-sm">
-          Your trusted partner for innovative lighting, automation, and HVAC solutions in Qatar since 2010. We craft experiences that combine innovation, reliability, and excellence.
+          Your trusted partner for innovative lighting, automation, and HVAC solutions in Qatar since 2026. We craft experiences that combine innovation, reliability, and excellence.
         </p>
 
         <div className="flex justify-center">

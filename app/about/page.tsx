@@ -10,8 +10,6 @@ export default function AboutPage() {
       <section data-header-theme="dark" >
       <HeroSection />
       <CompanyStory />
-      <Timeline />
-      <Statistics />
       <Team />
       <MissionVision />
       </section>

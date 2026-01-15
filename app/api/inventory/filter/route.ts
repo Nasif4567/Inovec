@@ -60,7 +60,9 @@ export async function POST(req: NextRequest) {
     if (categories?.length) {
       const lowerCats = categories.map((c) => c.toLowerCase());
       items = items.filter(
-        (item) => item.category && lowerCats.includes(item.category.toLowerCase())
+        (item) => item.category_name&& lowerCats.includes(item.
+category_name
+.toLowerCase())
       );
     }
 
