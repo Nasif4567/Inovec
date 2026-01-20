@@ -232,7 +232,7 @@ export default function AuthPage({
           {error && <p className="text-red-600 text-center mb-4 bg-red-50 p-2 rounded-lg">{error}</p>}
 
           <div className="space-y-4">
-            <input type="text" placeholder="Full Name" className="w-full p-3 border rounded-xl text-black" value={regName} onChange={(e) => setRegName(e.target.value)} />
+            <input type="text" placeholder="YourFull Name" className="w-full p-3 border rounded-xl text-black" value={regName} onChange={(e) => setRegName(e.target.value)} />
             <input type="email" placeholder="Email" className="w-full p-3 border rounded-xl text-black" value={regEmail} onChange={(e) => setRegEmail(e.target.value)} />
             {/* Reg PASSWORD WITH TOGGLE */}
             <div className="relative">

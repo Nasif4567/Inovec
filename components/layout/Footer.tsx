@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 INOVEC Trading Qatar. All rights reserved.</p>
+          <p>&copy; Naseem Al Kawther Trading W.L.L</p>
         </div>
       </div>
     </footer>

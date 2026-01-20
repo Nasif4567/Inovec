@@ -18,8 +18,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NAK | Leading Engineering Solutions in Qatar",
   description: "Qatar’s trusted partner for HVAC controls, emergency lighting, and building automation. Providing high-quality electro-mechanical products and engineering services.",
-  icons: {
-    icon: '../../public/resources/Letterhead.png',
+   icons: {
+    icon: '/favicon.ico',
   },
 };
 

@@ -68,7 +68,7 @@ const ContactUsPage: React.FC = () => {
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold text-gray-800">Email</h3>
-              <p className="text-gray-600">support@inovec.com</p>
+              <p className="text-gray-600">support@nak.qa</p>
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">Phone</h3>
